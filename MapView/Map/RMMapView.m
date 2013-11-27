@@ -353,6 +353,24 @@
     [self setNeedsUpdateConstraints];
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (!(self = [super initWithCoder:aDecoder]))
+        return nil;
+
+	CLLocationCoordinate2D coordinate;
+	coordinate.latitude = kDefaultInitialLatitude;
+	coordinate.longitude = kDefaultInitialLongitude;
+
+    [self performInitializationWithTilesource:[RMMapBoxSource new]
+                             centerCoordinate:coordinate
+                                    zoomLevel:kDefaultInitialZoomLevel
+                                 maxZoomLevel:kDefaultMaximumZoomLevel
+                                 minZoomLevel:kDefaultMinimumZoomLevel
+                              backgroundImage:nil];
+
+    return self;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     return [self initWithFrame:frame andTilesource:[RMMapBoxSource new]];
